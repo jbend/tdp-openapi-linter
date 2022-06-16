@@ -26,21 +26,15 @@ export class LinterController {
   async postLinter(@Req() request: Request ) {
     Logger.log('✅ Entering linter controller')
     try {
-      // Logger.debug('✅ Request body: ' + JSON.stringify(request.body));
-      // Logger.debug('✅ Request Query: ' + JSON.stringify(request.query));
       const ruleSet = request.query.rulesUrl || 'trimble-default';
-      // Logger.debug('✅ RuleSet: ' + ruleSet);
-
 
       const results = await this.linterService.linter(
         request.body,
         ruleSet,
       );
-      // request.url.searchParams.get('rulesUrl'),
       return JSON.stringify(results);
 
     } catch (err) {
-      // console.error(err.message);
       Logger.error(err.message);
 
       switch (err.name) {

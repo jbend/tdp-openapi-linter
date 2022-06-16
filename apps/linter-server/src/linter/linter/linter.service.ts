@@ -20,10 +20,15 @@ const defaultRules = 'https://raw.githubusercontent.com/jbend/tdp-spectral-rules
 @Injectable()
 export class LinterService {
 
+  /**
+   * the lint functiona does the actual execution or linting of the supplied
+   * document and ruleset.
+   * @param definitions
+   * @param flags
+   * @returns
+   */
   private async lint(definitions: Definition[],
     flags: ILintConfig): Promise<[Ruleset, IRuleResult[]]> {
-
-    Logger.log('✅ LinterService lint()')
 
     const spectral = new Spectral();
     const ruleset = await getRuleset(flags.ruleset);
@@ -50,12 +55,9 @@ export class LinterService {
     rulesUrl: string | undefined = defaultRules, // "https://rules.linting.org/testing/base.yaml"
     ): Promise<IRuleResult[]> {
 
-      Logger.log('✅ LinterService linter()')
-
       const definitions: Array<Definition> = [];
 
       try {
-        //Logger.debug('✅ Parsing YAML' + JSON.stringify(yaml));
         const loaded = loadAll(body); // works with both JSON and YAML.
         if (!Array.isArray(loaded)) {
           definitions.push(loaded as Definition);

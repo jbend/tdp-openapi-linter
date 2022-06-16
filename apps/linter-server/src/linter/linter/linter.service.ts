@@ -15,7 +15,11 @@ import { transpileModule, ModuleKind } from 'typescript';
 
 type Definition = object;
 
-const defaultRules = 'https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble-default.json';
+export const defaultRuleUrl = 'https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble-default.json';
+
+// https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble-default.json
+// https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/postman.json
+// https://rules.linting.org/testing/base.yaml
 
 @Injectable()
 export class LinterService {
@@ -52,7 +56,7 @@ export class LinterService {
   }
 
   public async linter(body: string,
-    rulesUrl: string | undefined = defaultRules, // "https://rules.linting.org/testing/base.yaml"
+    rulesUrl: string
     ): Promise<IRuleResult[]> {
 
       const definitions: Array<Definition> = [];
@@ -80,7 +84,7 @@ export class LinterService {
         'cjs',
         '.ts',
       ];
-      console.log('RulesUrl', rulesUrl);
+      Logger.log(rulesUrl, 'RulesUrl');
       if (!supportedFileExtensions.find((ext) => rulesUrl.endsWith(ext))) {
         // Should work for both JSON and YAML.
         // If it's actually JavaScript or TypeScript, ope.

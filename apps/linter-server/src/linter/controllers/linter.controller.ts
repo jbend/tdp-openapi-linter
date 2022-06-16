@@ -1,7 +1,7 @@
 import { Controller, Options, Header, Post, Req, HttpCode } from '@nestjs/common';
 import { problems, buildProblemResponse } from '../problems';
 import { Request } from 'express';
-import { LinterService } from '../linter/linter.service';
+import { LinterService, defaultRuleUrl } from '../linter/linter.service';
 import { Logger } from '@nestjs/common';
 
 @Controller()
@@ -24,13 +24,16 @@ export class LinterController {
   @Header('Content-Type', 'application/json; charset=utf-8')
   @HttpCode(200)
   async postLinter(@Req() request: Request ) {
-    Logger.log('✅ Entering linter controller')
+    Logger.log('POST /linter');
     try {
-      const ruleSet = request.query.rulesUrl || 'trimble-default';
+      let rulesUrl = defaultRuleUrl;
+      if (request.query.rulesUrl) {
+        rulesUrl = request.query.rulesUrl;
+      }
 
       const results = await this.linterService.linter(
         request.body,
-        ruleSet,
+        rulesUrl,
       );
       return JSON.stringify(results);
 

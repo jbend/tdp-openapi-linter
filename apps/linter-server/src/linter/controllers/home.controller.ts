@@ -1,4 +1,4 @@
-import { Controller, Get, Options, Header, HttpCode } from '@nestjs/common';
+import { Controller, Get, Options, Header, HttpCode, Logger } from '@nestjs/common';
 
 @Controller()
 export class HomeController {
@@ -16,6 +16,7 @@ export class HomeController {
   @Header('Access-Control-Allow-Origin', '*')
   @Header('Content-Type', 'application/home+json')
   getHome() {
+    Logger.log('GET /')
     return {
       api: {
         title: 'API Spec Linter',

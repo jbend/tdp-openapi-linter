@@ -1,10 +1,30 @@
 
 
-# TdpOpenapiLinterNx
+# TDP OpenAPI Linter
+
+The TDP Open API Linter is a node.js server for processing linting rules via Spectral.
+
+## Project
+
+
+[Postman Governance Rules](https://www.postman.com/postman/workspace/postman-open-technologies-governance-rules/overview)
+
+
+[Postman OpenAPI Linting](https://www.postman.com/postman/workspace/openapi-linting/overview)
+
+[Postman OpenAPI Linter - server source](https://github.com/postman-open-technologies/openapi-linter)
+
+[Trimble Developer Program - OpenAPI Linting Workspace](https://trimble-inc.postman.co/workspace/Trimble-API-Linting~053723c3-29bb-4bf5-8e0a-cd93ef70d444/overview)
+
+
+
+
+
+
 
 This project was generated using [Nx](https://nx.dev).
 
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="450"></p>
+<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="100"></p>
 
 🔎 **Smart, Fast and Extensible Build System**
 

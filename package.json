@@ -16,6 +16,7 @@
     "@stoplight/spectral-cli": "^6.4.1",
     "@stoplight/spectral-core": "^1.12.2",
     "@stoplight/spectral-parsers": "^1.0.1",
+    "body-parser": "^1.20.0",
     "js-yaml": "^4.1.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.0.0",

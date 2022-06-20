@@ -5,8 +5,8 @@
 
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import * as bodyParser from 'body-parser';
 
-//import { AppModule } from './app/app.module';
 import { LinterModule } from './linter/linter.module';
 
 async function bootstrap() {
@@ -14,6 +14,8 @@ async function bootstrap() {
   const linter = await NestFactory.create(LinterModule);
   const globalPrefix = 'v1';
   linter.setGlobalPrefix(globalPrefix);
+  linter.use(bodyParser.json({limit: '100mb'}));
+  linter.use(bodyParser.urlencoded({limit: '100mb'}));
   const port = process.env.PORT || 3333;
   await linter.listen(port);
   Logger.log(

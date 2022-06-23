@@ -1,4 +1,7 @@
-FROM node:lts-alpine
+# FROM node:alpine
+# FROM node:lts-alpine
+FROM node:16
+# RUN apk add g++ make python
 
 # Create app directory
 RUN mkdir -p /usr/src/app
@@ -7,7 +10,7 @@ WORKDIR /usr/src/app
 # Install app dependencies
 COPY package.json /usr/src/app/
 RUN npm install
-RUN npm run build
+# RUN npm run build
 
 # Bundle app source
 COPY dist/apps/linter-server /usr/src/app

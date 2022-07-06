@@ -1,6 +1,7 @@
 # FROM node:alpine
 # FROM node:lts-alpine
-FROM node:16
+# FROM node:16
+FROM --platform=linux/amd64 node:16-alpine
 # RUN apk add g++ make python
 
 # Create app directory

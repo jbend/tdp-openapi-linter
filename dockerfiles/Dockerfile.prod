@@ -1,0 +1,60 @@
+## FROM node:alpine
+## FROM node:lts-alpine
+## FROM node:16
+#FROM --platform=linux/amd64 node:16-alpine
+## RUN apk add g++ make python
+#
+## Create app directory
+#RUN mkdir -p /usr/src/app
+#WORKDIR /usr/src/app
+#
+## Install app dependencies
+#COPY package.json /usr/src/app/
+#COPY package-lock.json /usr/src/app/
+## RUN npm install --production
+#RUN npm ci --omit=dev
+## RUN npm run build
+#
+## Bundle app source
+#COPY dist/apps/linter-server /usr/src/app
+#
+#EXPOSE 3333
+#CMD [ "node", "main.js" ]
+
+FROM node:16-alpine as builder
+# for M1 chips, NX has Pythion requirements that fail without the proper platform
+# FROM --platform=linux/amd64 node:16-alpine as builder
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies)
+COPY . /usr/src/app
+
+RUN npm config set unsafe-perm true
+RUN npm install -g typescript
+RUN npm install -g ts-node
+RUN npm install -g nx
+
+RUN npm install
+
+# Build production bundle
+RUN npm run build 
+
+# Stage 2
+FROM node:16-alpine as production
+# for M1 chips, NX has Pythion requirements that fail without the proper platform
+# FROM --platform=linux/amd64 node:16-alpine as production
+
+WORKDIR /home/node/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY --from=builder /usr/src/app/dist/apps/linter-server /home/node/app
+
+# Switch to user at the last minute
+USER node
+
+EXPOSE 3333
+CMD [ "node", "main.js" ]

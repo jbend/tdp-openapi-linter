@@ -16,11 +16,17 @@ az acr login --name jbend
 Build image
 ```bash
 docker image build -t jbend.azurecr.io/tdp-openapi-linter:latest .
+docker image build -t jbend.azurecr.io/tdp-openapi-linter:local -f dockerfiles/Dockerfile.local .
+docker image build -t crtdp.azurecr.io/tdp-openapi-linter:0.0.4 -f dockerfiles/Dockerfile.prod .
 ```
 
 ```bash
 docker run -p 3333:3333 jbend.azurecr.io/tdp-openapi-linter:latest
+docker run -p 3333:3333 jbend.azurecr.io/tdp-openapi-linter:local
+docker run -p 3333:3333 crtdp.azurecr.io/tdp-openapi-linter:0.0.4
+
 ```
+
 
 ```bash
 docker run -d -p 3333:3333 jbend.azurecr.io/tdp-openapi-linter:latest

@@ -6,6 +6,9 @@
     "start": "nx serve linter-server",
     "start:server": "nx serve linter-server",
     "build": "nx build",
+    "build:server": "nx build linter-server --configuration=production",
+    "build:docker:dev": "./scripts/build-docker.sh dev",
+    "build:docker:prod": "./scripts/build-docker.sh prod",
     "test": "nx test"
   },
   "private": true,

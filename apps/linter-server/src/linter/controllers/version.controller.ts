@@ -10,7 +10,7 @@ export class VersionController {
     Logger.log('GET /version')
     return JSON.stringify(
         {
-          "version": "0.0.4"
+          "version": "0.0.5"
         }
       );
   }

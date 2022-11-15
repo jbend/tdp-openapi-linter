@@ -15,8 +15,10 @@ import { transpileModule, ModuleKind } from 'typescript';
 
 type Definition = object;
 
-export const defaultRuleUrl = 'https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble-default.json';
+// export const defaultRuleUrl = 'https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble-default.json';
+export const defaultRuleUrl = 'https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble.yaml';
 
+// https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble.yaml
 // https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/trimble-default.json
 // https://raw.githubusercontent.com/jbend/tdp-spectral-rules/main/rulesets/postman.json
 // https://rules.linting.org/testing/base.yaml
@@ -39,6 +41,7 @@ export class LinterService {
     spectral.setRuleset(ruleset);
 
     const results: IRuleResult[] = [];
+
     for (const [index, definition] of definitions.entries()) {
       const document = new Document(
         JSON.stringify(definition),
@@ -51,7 +54,6 @@ export class LinterService {
         })),
       );
     }
-
     return [spectral.ruleset, results];
   }
 
@@ -84,7 +86,7 @@ export class LinterService {
         'cjs',
         '.ts',
       ];
-      Logger.log(rulesUrl, 'RulesUrl');
+      // Logger.log(rulesUrl, 'RulesUrl');
       if (!supportedFileExtensions.find((ext) => rulesUrl.endsWith(ext))) {
         // Should work for both JSON and YAML.
         // If it's actually JavaScript or TypeScript, ope.

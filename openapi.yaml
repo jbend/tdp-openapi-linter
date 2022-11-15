@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI Specification Linter
+  description: "Spectral linting tool for OpenAPI specs"
+  contact:
+    name: Trimble Developer Program
+    url: https://trimble.com
+    email: tdp@trimble.com
+  license:
+    name: Trimble Connect API License
+    url: https://community.trimble.com/docs/DOC-10021
+  version: v1
+servers:
+  - url: https://cloud.trimble.com/v1
+    description: Production North America
+tags:
+  - name: Linter
+    description: Spectral Linter
+
+paths:
+  /:
+    get:
+      tags:
+        - Linter
+      summary: Linter metadata
+      description: Contains useful information about the linting API.
+      operationId: root
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema: {}
+  /version:
+    get:
+      tags:
+        - Linter
+      summary: Get API version
+      description: Returns the version of the API
+      operationId: version
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            text/plain:
+              schema: {}
